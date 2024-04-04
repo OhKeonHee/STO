@@ -15,6 +15,7 @@ const GlobalStyle = createGlobalStyle`
     line-height: 1.6;
     color: #333;
     background-color: #fff;
+    overflow-x: hidden;
   }
   a {
     color: #007bff;

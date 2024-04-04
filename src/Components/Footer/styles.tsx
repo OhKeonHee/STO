@@ -3,10 +3,14 @@ import styled from "styled-components";
 export const FooterWrapper = styled.div`
   width: 100vw;
   background-color: #f3f3f3;
-  padding: 30px;
+  padding: 30px 60px;
   display: flex;
   flex-direction: column;
   gap: 10px;
+`
+export const FooterLogo = styled.img`
+  width: 50px;
+  object-fit: contain;
 `
 export const FooterTxt = styled.p`
   font-size: 15px;

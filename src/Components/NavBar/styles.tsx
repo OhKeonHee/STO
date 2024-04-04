@@ -7,6 +7,7 @@ export const Blacked = styled.div`
   top: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.5);
+  z-index: 8;
 `
 export const NavBarWrapper = styled.div`
   width: 100vw;
@@ -22,6 +23,7 @@ export const NavBarLogo = styled.img`
   width: 170px;
   height: 50px;
   object-fit: contain;
+  cursor: pointer;
 `
 export const NavBarMenus = styled.div`
   display: flex;
