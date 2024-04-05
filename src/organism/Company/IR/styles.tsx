@@ -72,6 +72,9 @@ export const IRSearchArea = styled.div`
     width: 200px;
     border-right: none;
     border-radius: 6px 0 0 6px;
+    &::placeholder {
+      font-family: 'Pretendard';
+    }
   }
 `
 export const IRSearchIcon = styled.div`

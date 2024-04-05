@@ -18,14 +18,15 @@ export default React.memo(GotoTopBtn);
 
 const TopBtn = styled.button`
   position: fixed;
-  right: 20px;
-  bottom: 20px;
+  right: 50px;
+  bottom: 50px;
   background-color: #b50202;
   color: #fff;
   font-family: 'Pretendard';
   font-weight: bold;
   font-size: 16px;
-  width: 50px;
-  height: 50px;
-  border-radius: 50px;
+  width: 70px;
+  height: 70px;
+  border-radius: 70px;
+  z-index: 99;
 `

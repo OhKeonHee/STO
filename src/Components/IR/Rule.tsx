@@ -1,6 +1,7 @@
 import React from 'react'
 import { IRContent, RuleContent, RulePart, RuleTitle } from '../../organism/Company/IR/styles';
 import { RuleData } from '../Data/RuleData';
+import GotoTopBtn from '../GotoTopBtn';
 
 export const Rule = () => {
   const { Data } = RuleData();
@@ -19,6 +20,7 @@ export const Rule = () => {
           ))}
         </RulePart>
       ))}
+      <GotoTopBtn />
     </IRContent>
   )
 }

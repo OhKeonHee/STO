@@ -6,6 +6,7 @@ export const FooterWrapper = styled.div`
   padding: 30px 60px;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 10px;
 `
 export const FooterLogo = styled.img`

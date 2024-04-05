@@ -18,9 +18,9 @@ export const HoverMenu = () => {
         
       </HoverMenuDisplay>
       <HoverMenuDisplay>
-        <Menu>Apply</Menu>
-        <Menu>Job Preview</Menu>
-        <Menu>FAQ</Menu>
+        <Menu onClick={() => navigate('/recruit/apply')}>Apply</Menu>
+        <Menu onClick={() => navigate('/recruit/job')}>Job Preview</Menu>
+        <Menu onClick={() => navigate('/recruit/faq')}>FAQ</Menu>
       </HoverMenuDisplay>
       <HoverMenuDisplay>
       </HoverMenuDisplay>

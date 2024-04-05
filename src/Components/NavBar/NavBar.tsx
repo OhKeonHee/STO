@@ -43,7 +43,7 @@ export const NavBar = () => {
           <NavBarMenu onClick={handleScrollToBrands}>Brands</NavBarMenu>
           <NavBarMenu onClick={() => navigate('/hr')}>HR</NavBarMenu>
           <NavBarMenu>Recruit</NavBarMenu>
-          <NavBarMenu>CSR</NavBarMenu>
+          <NavBarMenu onClick={() => navigate('/csr')}>CSR</NavBarMenu>
         </NavBarMenus>
         <GoToOnlineMall onClick={() => window.open('https://www.stco.co.kr/')}>online mall</GoToOnlineMall>
         <HoverMenuWrapper 
