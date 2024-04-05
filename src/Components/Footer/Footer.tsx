@@ -26,7 +26,10 @@ export const Footer = () => {
         <FooterTxt>대표자 : 김흥수 / 서울시 강서구 양천로 583 우림블루나인비지니스센터 B동 15층</FooterTxt>
         <FooterTxt>통신판매업신고 : 제2009 서울강서 0684호 / 개인정보관리책임자 : 안중태</FooterTxt>
         <FooterTxt>대표메일주소 : stoonline@stco.co.kr / 대표번호 : 070-4687-7342</FooterTxt>
-        <FooterTxt style={{marginTop: 40}}>Copyright ⓒ STO. All right reserved</FooterTxt>
+        <FooterTxt style={{marginTop: 40}}>
+          Copyright ⓒ STO. All right reserved<br />
+          <a href='https://www.thesto.kr/' target='blank'>기존 STO 페이지: https://www.thesto.kr/</a>
+        </FooterTxt>
         <FooterSocials>
           <FooterSocial onClick={() => window.open('https://pf.kakao.com/_PyWxnz')}>
             <FooterIcon src='https://image.codigallery.com/all_img/stcomall/2021/main/210420_newheader/kakaoplus.png' alt='카카오플러스' />
