@@ -10,7 +10,7 @@ export const MapAPI = () => {
         lng: 126.8644,
       }}
       style={{
-        width: "1000px",
+        width: "100%",
         height: "450px",
       }}
       level={3}

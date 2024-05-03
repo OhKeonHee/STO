@@ -1,8 +1,19 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { PhilosophyContent, PhilosophyContentTxtArea, PhilosophyLogo, PhilosophySubTitle, PhilosophyTitle, PhilosophyTxt, PhilosophyWrapper } from '../../organism/Main/styles';
 import Philosophy_Logo from '../../Assets/imgs/Main/Philosophy.jpg'
 
 export const Philosophy = () => {
+  const [width, setWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <PhilosophyWrapper>
       <PhilosophyTitle>Philosophy</PhilosophyTitle>
@@ -29,13 +40,27 @@ export const Philosophy = () => {
           </p>
         </PhilosophyContentTxtArea>
         <PhilosophyContentTxtArea className='autonomy'>
-          <p>
-            항상 자신의 마음을 돌아보고 살펴라<br />
-            나부터 시작해라<br />
-            스스로 배움을 통하여 성장하라
-          </p>
-          <h1 className='vertical'></h1>
-          <span>자율성</span>
+          {width >= 700 ? (
+            <>
+              <p>
+                항상 자신의 마음을 돌아보고 살펴라<br />
+                나부터 시작해라<br />
+                스스로 배움을 통하여 성장하라
+              </p>
+              <h1 className='vertical'></h1>
+              <span>자율성</span>
+            </>
+          ) : (
+            <>
+              <span>자율성</span>
+              <h1 className='vertical'></h1>
+              <p>
+                항상 자신의 마음을 돌아보고 살펴라<br />
+                나부터 시작해라<br />
+                스스로 배움을 통하여 성장하라
+              </p>
+            </>
+          )}
         </PhilosophyContentTxtArea>
       </PhilosophyContent>
     </PhilosophyWrapper>

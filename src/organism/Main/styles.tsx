@@ -65,18 +65,43 @@ export const PhilosophySubTitle = styled.p`
   color: #111;
   font-weight: 600;
   letter-spacing: -0.4px;
+  @media (max-width: 700px) {
+    font-size: 18px;
+  }
 `
 export const PhilosophyTxt = styled.p`
   font-size: 18px;
   color: #111;
   font-weight: 400;
   letter-spacing: -0.4px;
+  @media (max-width: 1000px) {
+    font-size: 14px;
+    white-space: nowrap;
+  }
+  @media (max-width: 700px) {
+    font-size: 14px;
+    white-space: pre-wrap;
+    text-align: center;
+  }
 `
 export const PhilosophyContent = styled.div`
   position: relative;
   margin-top: 30px;
   height: 600px;
   width: 1120px;
+  @media (max-width: 1121px) {
+    width: auto;
+    min-width: 700px;
+  }
+  @media (max-width: 700px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 400px;
+    gap: 30px;
+    min-width: 100%;
+  }
 `
 export const PhilosophyContentTxtArea = styled.div`
   position: absolute;
@@ -101,16 +126,58 @@ export const PhilosophyContentTxtArea = styled.div`
     background-color: #EC2029;
     right: 80px;
     top: 80px;
+    @media (max-width: 1121px) {
+      right: -80px;
+    }
+    @media (max-width: 1000px) {
+      right: 0px;
+    }
+    @media (max-width: 700px) {
+      left: 0px;
+      top: 0;
+    }
   }
   &.dedication {
     background-color: #FAB429;
     right: 180px;
     bottom: 80px;
+    @media (max-width: 1121px) {
+      right: 0;
+    }
+    @media (max-width: 1000px) {
+      bottom: 100px;
+    }
+    @media (max-width: 700px) {
+      left: 0px;
+      top: 0;
+    }
   }
   &.autonomy {
     background-color: #EE5027;
     left: 80px;
     top: 180px;
+    @media (max-width: 1121px) {
+      left: -80px;
+    }
+    @media (max-width: 1000px) {
+      left: -20px;
+    }
+    @media (max-width: 700px) {
+      left: 0px;
+      top: 0;
+    }
+  }
+  @media (max-width: 1000px) {
+    span {
+      font-size: 16px;
+    }
+    p {
+      font-size: 11px;
+    }
+  }
+  @media (max-width: 700px) {
+    position: relative;
+    width: 80%;
   }
 `
 export const PhilosophyLogo = styled.img`
@@ -120,6 +187,9 @@ export const PhilosophyLogo = styled.img`
   transform: translate(-50%, -50%);
   width: 250px;
   object-fit: contain;
+  @media (max-width: 700px) {
+    display: none;
+  }
 `
 
 // ** History.tsx =====
@@ -164,6 +234,9 @@ export const BrandsContent = styled.div`
   align-items: center;
   justify-content: center;
   position: relative;
+  @media (max-width: 1000px) {
+    flex-direction: column;
+  }
   &.diems {
     gap: 80px;
     .logo {
@@ -200,8 +273,8 @@ export const BrandsImgContent = styled.div`
 `
 export const BrandsTxt = styled.div`
   position: absolute;
-  width: 400px;
-  height: 240px;
+  width: 50%;
+  height: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -234,11 +307,17 @@ export const BrandsTxtTitle = styled.p`
     font-weight: bold;
     color: #111;
   }
+  @media (max-width: 1150px) {
+    font-size: 14px;
+  }
 `
 export const BrandsTxtContent = styled.p`
   font-size: 13px;
   font-weight: 700;
   text-align: center;
+  @media (max-width: 1150px) {
+    font-size: 11px;
+  }
 `
 
 // ** Contact.tsx =====
@@ -287,6 +366,11 @@ export const Directions = styled.div`
   justify-content: center;
   padding: 50px;
   width: 1000px;
+  @media (max-width: 1000px) {
+    width: 80%;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
 `
 export const Traffic = styled.div`
   flex: 1;

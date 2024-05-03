@@ -48,7 +48,7 @@ export const Footer = () => {
             Facebook
           </FooterSocial>
         </FooterSocials>
-        <Select value={select} onChange={(e) => setSelect(e)} style={{fontFamily: 'Pretendard', position: 'absolute', right: 100, bottom: 0, minWidth: 200}}>
+        <Select value={select} onChange={(e) => setSelect(e)} style={{fontFamily: 'Pretendard', position: 'absolute', right: 10, top: 0, minWidth: 200}}>
           <option style={{fontFamily: 'Pretendard'}} value='Family Site'>Family Site</option>
           <option style={{fontFamily: 'Pretendard'}} value='STO BRAND'>STO BRAND</option>
           <option style={{fontFamily: 'Pretendard'}} value='STO MALL'>STO MALL</option>

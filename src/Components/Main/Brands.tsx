@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { BrandsContent, BrandsImg, BrandsImgContent, BrandsTitle, BrandsTxt, BrandsTxtContent, BrandsTxtTitle, BrandsWrapper } from '../../organism/Main/styles';
 import STCO_Logo from '../../Assets/imgs/Main/Brands/stco_Logo.png'
 import STCO_Content from '../../Assets/imgs/Main/Brands/stco.jpg'
@@ -10,6 +10,17 @@ import zero_Logo from '../../Assets/imgs/Main/Brands/zerolounge_Logo.png'
 import zero_Content from '../../Assets/imgs/Main/Brands/zerolounge.jpg'
 
 export const Brands = () => {
+  const [width, setWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <BrandsWrapper>
       <BrandsTitle>Brands</BrandsTitle>
@@ -27,17 +38,35 @@ export const Brands = () => {
         </BrandsImgContent>
       </BrandsContent>
       <BrandsContent className='diems'>
-        <BrandsImgContent>
-          <BrandsImg className='content' src={diems_Content} />
-          <BrandsTxt className='diems'>
-            <BrandsTxtTitle>Carpe diem. whenever A trend is stylish</BrandsTxtTitle>
-            <BrandsTxtContent>
-              일상 속 스타일리시하고 편안한 라이프 스타일을 추구하는<br />
-              모던 트레디셔널 캐주얼 브랜드입니다.
-            </BrandsTxtContent>
-          </BrandsTxt>
-        </BrandsImgContent>
-        <BrandsImg className='logo' src={diems_Logo} />
+        {width >= 1000 ? (
+          <>
+            <BrandsImgContent>
+              <BrandsImg className='content' src={diems_Content} />
+              <BrandsTxt className='diems'>
+                <BrandsTxtTitle>Carpe diem. whenever A trend is stylish</BrandsTxtTitle>
+                <BrandsTxtContent>
+                  일상 속 스타일리시하고 편안한 라이프 스타일을 추구하는<br />
+                  모던 트레디셔널 캐주얼 브랜드입니다.
+                </BrandsTxtContent>
+              </BrandsTxt>
+            </BrandsImgContent>
+            <BrandsImg className='logo' src={diems_Logo} />
+          </>
+        ) : (
+          <>
+            <BrandsImg className='logo' src={diems_Logo} />
+            <BrandsImgContent>
+              <BrandsImg className='content' src={diems_Content} />
+              <BrandsTxt className='diems'>
+                <BrandsTxtTitle>Carpe diem. whenever A trend is stylish</BrandsTxtTitle>
+                <BrandsTxtContent>
+                  일상 속 스타일리시하고 편안한 라이프 스타일을 추구하는<br />
+                  모던 트레디셔널 캐주얼 브랜드입니다.
+                </BrandsTxtContent>
+              </BrandsTxt>
+            </BrandsImgContent>
+          </>
+        )}
       </BrandsContent>
       <BrandsContent className='codi'>
         <BrandsImg className='logo' src={codi_Logo} />
@@ -53,19 +82,39 @@ export const Brands = () => {
         </BrandsImgContent>
       </BrandsContent>
       <BrandsContent className='zero'>
-        <BrandsImgContent>
-          <BrandsImg className='content' src={zero_Content} />
-          <BrandsTxt className='zero'>
-            <BrandsTxtTitle>Gentlemen's Life Style Shop</BrandsTxtTitle>
-            <BrandsTxtContent>
-              온라인 회원제 쇼핑몰 브랜드로 젠틀맨의 라이프 스타일과<br />
-              관련된 다양한 제품을 판매합니다.<br />
-              제로라운지의 유로회원들에게는 판매마진 ZERO의 가격으로<br />
-              지금껏 경험하지 못한 가격대비 최고의 혜택을 경험할 수 있습니다.
-            </BrandsTxtContent>
-          </BrandsTxt>
-        </BrandsImgContent>
-        <BrandsImg className='logo' src={zero_Logo} />
+      {width >= 1000 ? (
+          <>
+            <BrandsImgContent>
+              <BrandsImg className='content' src={zero_Content} />
+              <BrandsTxt className='zero'>
+                <BrandsTxtTitle>Gentlemen's Life Style Shop</BrandsTxtTitle>
+                <BrandsTxtContent>
+                  온라인 회원제 쇼핑몰 브랜드로 젠틀맨의 라이프 스타일과<br />
+                  관련된 다양한 제품을 판매합니다.<br />
+                  제로라운지의 유로회원들에게는 판매마진 ZERO의 가격으로<br />
+                  지금껏 경험하지 못한 가격대비 최고의 혜택을 경험할 수 있습니다.
+                </BrandsTxtContent>
+              </BrandsTxt>
+            </BrandsImgContent>
+            <BrandsImg className='logo' src={zero_Logo} />
+          </>
+        ) : (
+          <>
+            <BrandsImg className='logo' src={zero_Logo} />
+            <BrandsImgContent>
+              <BrandsImg className='content' src={zero_Content} />
+              <BrandsTxt className='zero'>
+                <BrandsTxtTitle>Gentlemen's Life Style Shop</BrandsTxtTitle>
+                <BrandsTxtContent>
+                  온라인 회원제 쇼핑몰 브랜드로 젠틀맨의 라이프 스타일과<br />
+                  관련된 다양한 제품을 판매합니다.<br />
+                  제로라운지의 유로회원들에게는 판매마진 ZERO의 가격으로<br />
+                  지금껏 경험하지 못한 가격대비 최고의 혜택을 경험할 수 있습니다.
+                </BrandsTxtContent>
+              </BrandsTxt>
+            </BrandsImgContent>
+          </>
+        )}
       </BrandsContent>
     </BrandsWrapper>
   )
