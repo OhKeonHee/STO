@@ -127,7 +127,7 @@ export const MobileNavBarWrapper = styled.div`
 export const MobileNavBarMenus = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 50px;
+  gap: 10px;
 `
 export const MobileNavBarMenu = styled.div`
   color: #2d2c2c;
@@ -143,6 +143,8 @@ export const MobileNavBarMenu = styled.div`
     color: #F5141C;
   }
   &.close {
+    position: absolute;
+    bottom: 50px;
     display: flex;
     flex-direction: column;
     margin-top: 100px;
@@ -155,4 +157,15 @@ export const MobileNavBarMenu = styled.div`
       scale: 1;
     }
   }
+`
+export const MobileNavBarDetail = styled.div`
+  background-color: #f1f1f1;
+  padding: 20px 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`
+export const MobileNavBarDetailMenu = styled.div`
+  font-size: 22px;
+  font-weight: bold;
 `

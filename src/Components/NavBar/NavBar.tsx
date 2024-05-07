@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { Blacked, GoToOnlineMall, HoverMenuWrapper, MobileNavBarMenu, MobileNavBarMenus, MobileNavBarWrapper, NavBarIcon, NavBarLogo, NavBarMenu, NavBarMenus, NavBarWrapper } from './styles';
+import { Blacked, GoToOnlineMall, HoverMenuWrapper, MobileNavBarDetail, MobileNavBarDetailMenu, MobileNavBarMenu, MobileNavBarMenus, MobileNavBarWrapper, NavBarIcon, NavBarLogo, NavBarMenu, NavBarMenus, NavBarWrapper } from './styles';
 import Logo from '../../Assets/imgs/STO_logo.png'
 import HoverMenu from './HoverMenu';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { FaBars } from "react-icons/fa";
+import { FaBars, FaChevronUp } from "react-icons/fa";
 import { FaChevronDown } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 
@@ -20,6 +20,8 @@ export const NavBar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [clickBar, setClickBar] = useState(false);
+  const [mobileCompany, setMobileCompany] = useState(false);
+  const [mobileRecruit, setMobileRecruit] = useState(false);
 
   const [width, setWidth] = useState(window.innerWidth);
 
@@ -37,6 +39,7 @@ export const NavBar = () => {
       navigate('/', { state: { scrollToBrands: true } });
     } else {
       scrollToBrands();
+      setClickBar(false);
     }
   };
 
@@ -44,6 +47,7 @@ export const NavBar = () => {
     if (location.state && location.state.scrollToBrands) {
       scrollToBrands();
       setIsHovered(false);
+      setClickBar(false);
     }
   }, [location.state]);
 
@@ -82,16 +86,30 @@ export const NavBar = () => {
         <MobileNavBarWrapper>
           <NavBarLogo src={Logo} style={{width: 170, height: 130, position: 'absolute', top: 50}} />
           <MobileNavBarMenus>
-            <MobileNavBarMenu>
+            <MobileNavBarMenu onClick={() => setMobileCompany(!mobileCompany)}>
               Company
               <NavBarIcon>
-                <FaChevronDown />
+                {mobileCompany ? <FaChevronUp /> : <FaChevronDown />}
               </NavBarIcon>
             </MobileNavBarMenu>
-            <MobileNavBarMenu>Brands</MobileNavBarMenu>
-            <MobileNavBarMenu>HR</MobileNavBarMenu>
-            <MobileNavBarMenu>Recruit</MobileNavBarMenu>
-            <MobileNavBarMenu>CSR</MobileNavBarMenu>
+            <MobileNavBarDetail style={{display: mobileCompany ? 'flex' : 'none'}}>
+              <MobileNavBarDetailMenu onClick={() => {navigate('/company/IR'); setClickBar(false)}}>IR</MobileNavBarDetailMenu>
+              <MobileNavBarDetailMenu onClick={() => {navigate('/company/news'); setClickBar(false)}}>NEWS</MobileNavBarDetailMenu>
+            </MobileNavBarDetail>
+            <MobileNavBarMenu onClick={handleScrollToBrands}>Brands</MobileNavBarMenu>
+            <MobileNavBarMenu onClick={() => {navigate('/hr'); setClickBar(false)}}>HR</MobileNavBarMenu>
+            <MobileNavBarMenu onClick={() => setMobileRecruit(!mobileRecruit)}>
+              Recruit
+              <NavBarIcon>
+                {mobileRecruit ? <FaChevronUp /> : <FaChevronDown />}
+              </NavBarIcon>
+            </MobileNavBarMenu>
+            <MobileNavBarDetail style={{display: mobileRecruit ? 'flex' : 'none'}}>
+              <MobileNavBarDetailMenu onClick={() => {navigate('/recruit/apply'); setClickBar(false)}}>Apply</MobileNavBarDetailMenu>
+              <MobileNavBarDetailMenu onClick={() => {navigate('/recruit/job'); setClickBar(false)}}>Job</MobileNavBarDetailMenu>
+              <MobileNavBarDetailMenu onClick={() => {navigate('/recruit/faq'); setClickBar(false)}}>FAQ</MobileNavBarDetailMenu>
+            </MobileNavBarDetail>
+            <MobileNavBarMenu onClick={() => {navigate('/csr'); setClickBar(false)}}>CSR</MobileNavBarMenu>
             <MobileNavBarMenu className='onlineMall' onClick={() => window.open('https://www.stco.co.kr/')}>Online Mall</MobileNavBarMenu>
             <MobileNavBarMenu className='close'>
               <NavBarIcon onClick={() => setClickBar(false)}>
