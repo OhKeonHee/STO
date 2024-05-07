@@ -1,5 +1,5 @@
 import { Input, Table, TableProps } from 'antd';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { IRContent, IRSearchArea, IRSearchIcon } from '../../organism/Company/IR/styles';
 import { IoSearch } from "react-icons/io5";
 import { BusinessData } from '../Data/BusinessData';
@@ -18,7 +18,16 @@ export const BusinessPerformance: React.FC<Props> = ({ setSelect }) => {
   const { Data } = BusinessData();
   const [keyword, setKeyword] = useState('');
   const [filteredData, setFilteredData] = useState(Data?.reverse());
-  
+  const [width, setWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const handleSearch = () => {
     const filtered = Data.filter(item => item?.title?.includes(keyword));
@@ -48,7 +57,7 @@ export const BusinessPerformance: React.FC<Props> = ({ setSelect }) => {
             style={{color: '#0072fd', cursor: 'pointer'}}
             onClick={() => setSelect(index + 1)}
           >
-            <p>{data?.title}</p>
+            <p style={{fontSize: width >= 600 ? '14px' : '11px'}}>{data?.title}</p>
           </div>
         )
       }
@@ -59,7 +68,7 @@ export const BusinessPerformance: React.FC<Props> = ({ setSelect }) => {
       render: (value, data, index) => {
         return (
           <div key={index} className='name'>
-            <p>{data?.name}</p>
+            <p style={{fontSize: width >= 600 ? '14px' : '11px', whiteSpace: 'nowrap'}}>{data?.name}</p>
           </div>
         )
       }
@@ -70,14 +79,14 @@ export const BusinessPerformance: React.FC<Props> = ({ setSelect }) => {
       render: (value, data, index) => {
         return (
           <div key={index} className='date'>
-            <p>{data?.date}</p>
+            <p style={{fontSize: width >= 600 ? '14px' : '11px', whiteSpace: 'nowrap'}}>{width >= 550 ? data?.date : data?.date?.slice(2)}</p>
           </div>
         )
       }
     },
   ];
   return (
-    <IRContent>
+    <IRContent style={{marginBottom: 110}}>
       <IRSearchArea>
         <Input 
           value={keyword} 

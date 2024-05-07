@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ApplicationContent, ApplicationForm, ApplicationHeader, ApplicationWrapper, FormPart, FormRadios, FormTitle } from '../../organism/Recruit/Apply/styles';
 import { Input, Radio, Select, message } from 'antd';
 import { FaCaretRight } from 'react-icons/fa';
@@ -8,6 +8,16 @@ export const ApplicationEdit = () => {
   const [phone, setPhone] = useState('');
   const [isPhone, setIsPhone] = useState(false);
   const [timer, setTimer] = useState(0);
+  const [width, setWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const handleClickPhone = () => {
     if (phone == '') {
@@ -24,7 +34,7 @@ export const ApplicationEdit = () => {
   }
 
   return (
-    <ApplicationWrapper style={{minHeight: 516}}>
+    <ApplicationWrapper style={{minHeight: 546}}>
       <ApplicationHeader>지원서 수정</ApplicationHeader>
       <ApplicationContent>
         <ApplicationForm style={{marginTop: 0}}>
@@ -33,9 +43,11 @@ export const ApplicationEdit = () => {
             <label htmlFor='type'>채용구분</label>
             <Select id='type'></Select>
           </FormPart>
-          <FormPart>
-            <label htmlFor='name'>이름</label>
-            <Input id='name' placeholder='이름을 입력해주세요.' />
+          <FormPart style={{flexDirection: width >= 555 ? 'row' : 'column', alignItems: width >= 555 ? 'center' : 'flex-start'}}>
+            <div style={{display: 'flex', alignItems: 'center'}}>
+              <label style={{width: 118}} htmlFor='name'>이름</label>
+              <Input id='name' placeholder='이름을 입력해주세요.' />
+            </div>
             <FormRadios>
               <div>
                 <Radio id='korean' value='korean' onChange={(e) => setNation(e.target.value)} checked={nation == 'korean'} />
@@ -47,9 +59,11 @@ export const ApplicationEdit = () => {
               </div>
             </FormRadios>
           </FormPart>
-          <FormPart>
-            <label htmlFor='phone'>핸드폰 인증</label>
-            <Input id='phone' placeholder='휴대폰 번호 - 없이 입력' value={phone} onChange={(e) => setPhone(e.target.value)} />
+          <FormPart style={{flexDirection: width >= 460 ? 'row' : 'column', alignItems: width >= 460 ? 'center' : 'flex-start'}}>
+            <>
+              <label htmlFor='phone'>핸드폰 인증</label>
+              <Input id='phone' placeholder='휴대폰 번호 - 없이 입력' value={phone} onChange={(e) => setPhone(e.target.value)} />
+            </>
             <button onClick={handleClickPhone}>인증하기</button>
           </FormPart>
           {isPhone && (
@@ -63,9 +77,11 @@ export const ApplicationEdit = () => {
               <button className='re'>인증번호 재발송</button>
             </FormPart>
           )}
-          <FormPart>
-            <label htmlFor='password'>비밀번호</label>
-            <Input type='password' id='password' placeholder='비밀번호를 입력해주세요.' />
+          <FormPart style={{flexDirection: width >= 490 ? 'row' : 'column', alignItems: width >= 490 ? 'center' : 'flex-start'}}>
+            <>
+              <label htmlFor='password'>비밀번호</label>
+              <Input type='password' id='password' placeholder='비밀번호를 입력해주세요.' />
+            </>
             <button className='findPassword'>비밀번호 찾기</button>
           </FormPart>
           <FormPart>

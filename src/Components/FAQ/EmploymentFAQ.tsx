@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { IRContent, IRSearchArea, IRSearchIcon } from '../../organism/Company/IR/styles';
-import { Input, Table, TableProps } from 'antd';
+import { Input, Table, TableColumnType, TableProps } from 'antd';
 import { IoSearch } from 'react-icons/io5';
 import { EmploymentFAQ_Data } from '../Data/FAQ/EmploymentFAQ_Data';
 import SelectEmploymentFaq from './SelectEmploymentFaq';
@@ -18,13 +18,23 @@ export const EmploymentFAQ = () => {
   const [keyword, setKeyword] = useState('');
   const [filteredData, setFilteredData] = useState(Data);
   const [select, setSelect] = useState(0);
+  const [width, setWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const handleSearch = () => {
     const filtered = Data.filter(item => item?.title?.includes(keyword));
     setFilteredData(filtered);
   };
 
-  const columns: TableProps<DataType>['columns'] = [
+  const columns: TableColumnType<DataType>[] = [
     {
       dataIndex: 'id',
       title: '번호',
@@ -47,7 +57,7 @@ export const EmploymentFAQ = () => {
             style={{textAlign: 'left', cursor: 'pointer', color: '#4096ff'}}
             onClick={() => setSelect(data?.id)}
           >
-            <p>{data?.title}</p>
+            <p style={{fontSize: width >= 610 ? 14 : 11}}>{data?.title}</p>
           </div>
         )
       }
@@ -58,7 +68,7 @@ export const EmploymentFAQ = () => {
       render: (value, data, index) => {
         return (
           <div key={index} className='name'>
-            <p>{data?.name}</p>
+            <p style={{fontSize: width >= 610 ? 14 : 11, whiteSpace: 'nowrap'}}>{data?.name}</p>
           </div>
         )
       }
@@ -69,7 +79,7 @@ export const EmploymentFAQ = () => {
       render: (value, data, index) => {
         return (
           <div key={index} className='date'>
-            <p>{data?.data}</p>
+            <p style={{fontSize: width >= 610 ? 14 : 11, whiteSpace: 'nowrap'}}>{width >= 570 ? data?.data : data?.data?.slice(2)}</p>
           </div>
         )
       }
@@ -80,12 +90,17 @@ export const EmploymentFAQ = () => {
       render: (value, data, index) => {
         return (
           <div key={index} className='isAnswer'>
-            <p>{data?.isAnswer ? 'O' : 'X'}</p>
+            <p style={{fontSize: width >= 610 ? 14 : 11, whiteSpace: 'nowrap'}}>{data?.isAnswer ? 'O' : 'X'}</p>
           </div>
         )
       }
     },
   ];
+
+  const filteredColumns = columns.filter(column => {
+    if (column.dataIndex === 'id' && width < 620) return false;
+    return true;
+  });
 
   return (
     <IRContent>
@@ -100,7 +115,7 @@ export const EmploymentFAQ = () => {
           <IoSearch />
         </IRSearchIcon>
       </IRSearchArea>
-      <Table className='disclosure' dataSource={filteredData} columns={columns} />
+      <Table className='disclosure' dataSource={filteredData} columns={filteredColumns} />
       {select !== 0 && <SelectEmploymentFaq select={select} setSelect={setSelect} />}
     </IRContent>
   )

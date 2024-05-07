@@ -1,5 +1,5 @@
 import { Input, Table, TableProps } from 'antd';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { DisclosureData } from '../Data/DisclosureData';
 import { IRContent, IRSearchArea, IRSearchIcon } from '../../organism/Company/IR/styles';
 import { IoSearch } from "react-icons/io5";
@@ -14,6 +14,16 @@ export const Disclosure = () => {
   const { Data } = DisclosureData();
   const [keyword, setKeyword] = useState('');
   const [filteredData, setFilteredData] = useState(Data);
+  const [width, setWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const handleSearch = () => {
     const filtered = Data.filter(item => item?.title?.includes(keyword));
@@ -27,7 +37,7 @@ export const Disclosure = () => {
       render: (value, data, index) => {
         return (
           <div key={index} className='date'>
-            <p>{data?.date}</p>
+            <p style={{fontSize: width >= 600 ? '14px' : '11px'}}>{width >= 700 ? data?.date : data?.date?.slice(5)}</p>
           </div>
         )
       }
@@ -38,7 +48,7 @@ export const Disclosure = () => {
       render: (value, data, index) => {
         return (
           <div key={index} className='title'>
-            <p>{data?.title}</p>
+            <p style={{fontSize: width >= 600 ? '14px' : '11px'}}>{data?.title}</p>
           </div>
         )
       }
@@ -49,7 +59,7 @@ export const Disclosure = () => {
       render: (value, data, index) => {
         return (
           <div key={index} className='PIC'>
-            <p>{data?.PIC}</p>
+            <p style={{fontSize: width >= 600 ? '14px' : '11px'}}>{data?.PIC}</p>
           </div>
         )
       }

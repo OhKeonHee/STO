@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { IRContent, IRSearchArea, IRSearchIcon } from '../../organism/Company/IR/styles';
-import { Input, Table, TableProps } from 'antd';
+import { Input, Table, TableColumnType, TableProps } from 'antd';
 import { IoSearch } from 'react-icons/io5';
 import { ApplicationFAQ_Data } from '../Data/FAQ/ApplicationFAQ_Data';
 import SelectApplicationFaq from './SelectApplicationFaq';
@@ -16,13 +16,23 @@ export const ApplicationFAQ = () => {
   const [keyword, setKeyword] = useState('');
   const [filteredData, setFilteredData] = useState(Data?.reverse());
   const [select, setSelect] = useState(0);
+  const [width, setWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const handleSearch = () => {
     const filtered = Data.filter(item => item?.question?.includes(keyword));
     setFilteredData(filtered);
   };
 
-  const columns: TableProps<DataType>['columns'] = [
+  const columns: TableColumnType<DataType>[] = [
     {
       dataIndex: 'id',
       title: '번호',
@@ -52,6 +62,11 @@ export const ApplicationFAQ = () => {
     },
   ];
 
+  const filteredColumns = columns.filter(column => {
+    if (column.dataIndex === 'id' && width < 550) return false;
+    return true;
+  });
+
   return (
     <IRContent>
       <IRSearchArea>
@@ -65,7 +80,7 @@ export const ApplicationFAQ = () => {
           <IoSearch />
         </IRSearchIcon>
       </IRSearchArea>
-      <Table className='disclosure' dataSource={filteredData} columns={columns} />
+      <Table className='disclosure' dataSource={filteredData} columns={filteredColumns} />
       {select !== 0 && <SelectApplicationFaq select={select} setSelect={setSelect} />}
     </IRContent>
   )

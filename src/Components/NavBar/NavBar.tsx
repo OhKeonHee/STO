@@ -43,6 +43,7 @@ export const NavBar = () => {
   useEffect(() => {
     if (location.state && location.state.scrollToBrands) {
       scrollToBrands();
+      setIsHovered(false);
     }
   }, [location.state]);
 
@@ -57,12 +58,12 @@ export const NavBar = () => {
         <NavBarLogo src={Logo} onClick={() => navigate('/')} />
         {width >= 700 ? (
           <>
-            <NavBarMenus onMouseEnter={() => setIsHovered(true)} onClick={() => setIsHovered(true)}>
-              <NavBarMenu>Company</NavBarMenu>
+            <NavBarMenus onMouseEnter={() => setIsHovered(true)}>
+              <NavBarMenu onClick={() => setIsHovered(true)}>Company</NavBarMenu>
               <NavBarMenu onClick={handleScrollToBrands}>Brands</NavBarMenu>
-              <NavBarMenu onClick={() => navigate('/hr')}>HR</NavBarMenu>
-              <NavBarMenu>Recruit</NavBarMenu>
-              <NavBarMenu onClick={() => navigate('/csr')}>CSR</NavBarMenu>
+              <NavBarMenu onClick={() => {navigate('/hr'); setIsHovered(false)}}>HR</NavBarMenu>
+              <NavBarMenu onClick={() => setIsHovered(true)}>Recruit</NavBarMenu>
+              <NavBarMenu onClick={() => {navigate('/csr'); setIsHovered(false)}}>CSR</NavBarMenu>
             </NavBarMenus>
             <GoToOnlineMall onClick={() => window.open('https://www.stco.co.kr/')}>online mall</GoToOnlineMall>
           </>
@@ -74,7 +75,7 @@ export const NavBar = () => {
         <HoverMenuWrapper 
           style={{ opacity: isHovered ? '1' : '0' }}
         >
-          <HoverMenu isHovered={isHovered} />
+          <HoverMenu isHovered={isHovered} setIsHovered={setIsHovered} />
         </HoverMenuWrapper>
       </NavBarWrapper>
       {clickBar && (

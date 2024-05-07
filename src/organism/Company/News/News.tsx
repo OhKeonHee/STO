@@ -1,5 +1,5 @@
-import { Input, Table, TableProps } from 'antd';
-import React, { useState } from 'react'
+import { Input, Table, TableColumnType, TableProps } from 'antd';
+import React, { useEffect, useState } from 'react'
 import { IRContent, IRSearchArea, IRSearchIcon, IRTitle, IRWrapper } from '../../../organism/Company/IR/styles';
 import { IoSearch } from "react-icons/io5";
 import { NewsData } from '../../../Components/Data/NewsData';
@@ -15,20 +15,30 @@ export const News = () => {
   const { Data } = NewsData();
   const [keyword, setKeyword] = useState('');
   const [filteredData, setFilteredData] = useState(Data);
+  const [width, setWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const handleSearch = () => {
     const filtered = Data.filter(item => item?.title?.includes(keyword));
     setFilteredData(filtered);
   };
 
-  const columns: TableProps<DataType>['columns'] = [
+  const columns: TableColumnType<DataType>[] = [
     {
       dataIndex: 'index',
       title: '번호',
       render: (value, data, index) => {
         return (
           <div key={index} className='index'>
-            <p>{data?.id}</p>
+            <p style={{fontSize: width >= 600 ? '14px' : '11px', whiteSpace: 'nowrap'}}>{data?.id}</p>
           </div>
         )
       }
@@ -39,7 +49,7 @@ export const News = () => {
       render: (value, data, index) => {
         return (
           <div key={index} className='title'>
-            <p>{data?.title}</p>
+            <p style={{fontSize: width >= 600 ? '14px' : '11px'}}>{data?.title}</p>
           </div>
         )
       }
@@ -50,7 +60,7 @@ export const News = () => {
       render: (value, data, index) => {
         return (
           <div key={index} className='name'>
-            <p>{data?.name}</p>
+            <p style={{fontSize: width >= 600 ? '14px' : '11px', whiteSpace: 'nowrap'}}>{data?.name}</p>
           </div>
         )
       }
@@ -61,12 +71,18 @@ export const News = () => {
       render: (value, data, index) => {
         return (
           <div key={index} className='date'>
-            <p>{data?.date}</p>
+            <p style={{fontSize: width >= 600 ? '14px' : '11px', whiteSpace: 'nowrap'}}>{width >= 550 ? data?.date : data?.date?.slice(2)}</p>
           </div>
         )
       }
     },
   ];
+
+  const filteredColumns = columns.filter(column => {
+    if (column.dataIndex === 'index' && width < 448) return false;
+    return true;
+  });
+
   return (
     <IRWrapper>
       <IRTitle>NEWS</IRTitle>
@@ -83,7 +99,7 @@ export const News = () => {
             <IoSearch />
           </IRSearchIcon>
         </IRSearchArea>
-        <Table className='disclosure' dataSource={filteredData} columns={columns} />
+        <Table className='disclosure' dataSource={filteredData} columns={filteredColumns} />
       </IRContent>
     </IRWrapper>
   )

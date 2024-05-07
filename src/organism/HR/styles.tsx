@@ -5,6 +5,9 @@ export const HRWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  @media (max-width: 1024px) {
+    padding: 80px 20px;
+  }
 `
 export const HRTitle = styled.p`
   font-size: 32px;
@@ -19,6 +22,15 @@ export const HRSubTitle = styled.p`
   color: #111;
   margin-bottom: 20px;
   letter-spacing: -0.4px;
+  @media (max-width: 600px) {
+    font-size: 18px;
+  }
+  @media (max-width: 475px) {
+    font-size: 15px;
+  }
+  @media (max-width: 400px) {
+    font-size: 13px;
+  }
 `
 export const HRParts = styled.div`
   display: flex;
@@ -33,6 +45,9 @@ export const HRPart = styled.div`
   padding-left: 50px;
   gap: 20px;
   border-radius: 100px;
+  @media (max-width: 840px) {
+    padding: 40px;
+  }
 `
 export const HRPeopleImgWrapper = styled.div`
   display: flex;
@@ -61,6 +76,9 @@ export const HRPeopleTxt = styled.div`
   span {
     font-weight: 700;
   }
+  @media (max-width: 905px) {
+    font-size: 14px;
+  }
 `
 export const HRCultureWrapper = styled.div`
   margin-top: 200px;
@@ -69,5 +87,8 @@ export const HRCultureWrapper = styled.div`
   align-items: center;
   img {
     margin-top: 50px;
+  }
+  @media (max-width: 1000px) {
+    margin-top: 100px;
   }
 `

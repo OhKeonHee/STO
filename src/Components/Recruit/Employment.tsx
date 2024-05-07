@@ -1,5 +1,5 @@
-import { Input, Table, TableProps } from 'antd';
-import React, { useState } from 'react'
+import { Input, Table, TableColumnType, TableProps } from 'antd';
+import React, { useEffect, useState } from 'react'
 import { DisclosureData } from '../Data/DisclosureData';
 import { IRContent, IRSearchArea, IRSearchIcon } from '../../organism/Company/IR/styles';
 import { IoSearch } from "react-icons/io5";
@@ -17,13 +17,23 @@ export const Employment = () => {
   const { Data } = EmploymentData();
   const [keyword, setKeyword] = useState('');
   const [filteredData, setFilteredData] = useState(Data?.reverse());
+  const [width, setWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const handleSearch = () => {
     const filtered = Data.filter(item => item?.title?.includes(keyword));
     setFilteredData(filtered);
   };
 
-  const columns: TableProps<DataType>['columns'] = [
+  const columns: TableColumnType<DataType>[] = [
     {
       dataIndex: 'id',
       title: '번호',
@@ -41,7 +51,7 @@ export const Employment = () => {
       render: (value, data, index) => {
         return (
           <div key={index} className='title' style={{textAlign: 'left'}}>
-            <p>{data?.title}</p>
+            <p style={{fontSize: width >= 550 ? 14 : 11}}>{data?.title}</p>
           </div>
         )
       }
@@ -52,7 +62,7 @@ export const Employment = () => {
       render: (value, data, index) => {
         return (
           <div key={index} className='field'>
-            <p>{data?.field}</p>
+            <p style={{whiteSpace: 'nowrap', fontSize: width >= 550 ? 14 : 11}}>{data?.field}</p>
           </div>
         )
       }
@@ -63,7 +73,7 @@ export const Employment = () => {
       render: (value, data, index) => {
         return (
           <div key={index} className='period'>
-            <p>{data?.period}</p>
+            <p style={{whiteSpace: 'nowrap', fontSize: width >= 550 ? 14 : 11}}>{width >= 610 ? data?.period : data?.period?.slice(11)}</p>
           </div>
         )
       }
@@ -74,7 +84,7 @@ export const Employment = () => {
       render: (value, data, index) => {
         return (
           <div key={index} className='status'>
-            <p style={{color: '#fff', backgroundColor: '#969696', padding: 2, borderRadius: 5}}>
+            <p style={{color: '#fff', backgroundColor: '#969696', padding: 2, borderRadius: 5, fontSize: width >= 550 ? 14 : 11}}>
               {data?.status}
             </p>
           </div>
@@ -82,6 +92,12 @@ export const Employment = () => {
       }
     },
   ];
+
+  const filteredColumns = columns.filter(column => {
+    if (column.dataIndex === 'id' && width < 655) return false;
+    return true;
+  });
+
   return (
     <IRContent>
       <IRSearchArea>
@@ -95,7 +111,7 @@ export const Employment = () => {
           <IoSearch />
         </IRSearchIcon>
       </IRSearchArea>
-      <Table className='disclosure' dataSource={filteredData} columns={columns} />
+      <Table className='disclosure' dataSource={filteredData} columns={filteredColumns} />
     </IRContent>
   )
 }

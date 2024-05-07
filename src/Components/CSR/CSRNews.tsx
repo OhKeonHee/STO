@@ -1,5 +1,5 @@
-import { Input, Table, TableProps } from 'antd';
-import React, { useState } from 'react'
+import { Input, Table, TableColumnType, TableProps } from 'antd';
+import React, { useEffect, useState } from 'react'
 import { DisclosureData } from '../Data/DisclosureData';
 import { IRContent, IRSearchArea, IRSearchIcon } from '../../organism/Company/IR/styles';
 import { IoSearch } from "react-icons/io5";
@@ -21,13 +21,23 @@ export const CSRNews = () => {
   const [filteredData, setFilteredData] = useState(Data);
   const [select, setSelect] = useState(0);
   const selectNews = Data?.find(it => it?.id == select);
+  const [width, setWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const handleSearch = () => {
     const filtered = Data.filter(item => item?.title?.includes(keyword));
     setFilteredData(filtered);
   };
 
-  const columns: TableProps<DataType>['columns'] = [
+  const columns: TableColumnType<DataType>[] = [
     {
       dataIndex: 'id',
       title: '번호',
@@ -56,7 +66,7 @@ export const CSRNews = () => {
       render: (value, data, index) => {
         return (
           <div key={index} className='title' style={{cursor: 'pointer', color: '#4096ff'}} onClick={() => setSelect(data?.id)}>
-            <p>{data?.title}</p>
+            <p style={{fontSize: width >= 610 ? 14 : 11}}>{data?.title}</p>
           </div>
         )
       }
@@ -67,7 +77,7 @@ export const CSRNews = () => {
       render: (value, data, index) => {
         return (
           <div key={index} className='writer'>
-            <p>{data?.writer}</p>
+            <p style={{fontSize: width >= 610 ? 14 : 11, whiteSpace: 'nowrap'}}>{data?.writer}</p>
           </div>
         )
       }
@@ -78,16 +88,23 @@ export const CSRNews = () => {
       render: (value, data, index) => {
         return (
           <div key={index} className='date'>
-            <p>{data?.date}</p>
+            <p style={{fontSize: width >= 610 ? 14 : 11, whiteSpace: 'nowrap'}}>{width >= 1024 ? data?.date : data?.date?.slice(2)}</p>
           </div>
         )
       }
     },
   ];
+
+  const filteredColumns = columns.filter(column => {
+    if (column.dataIndex === 'id' && width < 1024) return false;
+    if (column.dataIndex === 'img' && width < 500) return false;
+    return true;
+  });
+
   return (
     <>
       {select == 0 ? (
-        <IRContent>
+        <IRContent style={{minHeight: 660}}>
           <IRSearchArea>
             <Input 
               value={keyword} 
@@ -99,7 +116,7 @@ export const CSRNews = () => {
               <IoSearch />
             </IRSearchIcon>
           </IRSearchArea>
-          <Table className='disclosure' dataSource={filteredData} columns={columns} pagination={{ pageSize: 3 }} />
+          <Table className='disclosure' dataSource={filteredData} columns={filteredColumns} pagination={{ pageSize: 3 }} />
         </IRContent>
       ) : (
         <IRContent style={{alignItems: 'flex-start', position: 'relative', maxWidth: 1000}}>

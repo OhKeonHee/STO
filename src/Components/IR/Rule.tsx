@@ -8,7 +8,7 @@ export const Rule = () => {
   return (
     <IRContent>
       {Data?.map((it, idx) => (
-        <RulePart key={idx}>
+        <RulePart key={idx} style={{marginTop: -50}}>
           <RuleTitle style={{ letterSpacing: 10, marginTop: 60 }}>
             {it?.title}
           </RuleTitle>
