@@ -16,6 +16,7 @@ const scrollToBrands = () => {
 
 export const NavBar = () => {
   const [isHovered, setIsHovered] = useState(false);
+
   const navigate = useNavigate();
   const location = useLocation();
   const [clickBar, setClickBar] = useState(false);
@@ -50,12 +51,13 @@ export const NavBar = () => {
       <Blacked 
         style={{ display: isHovered ? 'block' : 'none' }} 
         onMouseEnter={() => setIsHovered(false)}
+        onClick={() => setIsHovered(false)}
       />
       <NavBarWrapper style={{ justifyContent: width >= 700 ? 'center' : 'space-between' }}>
         <NavBarLogo src={Logo} onClick={() => navigate('/')} />
         {width >= 700 ? (
           <>
-            <NavBarMenus onMouseEnter={() => setIsHovered(true)}>
+            <NavBarMenus onMouseEnter={() => setIsHovered(true)} onClick={() => setIsHovered(true)}>
               <NavBarMenu>Company</NavBarMenu>
               <NavBarMenu onClick={handleScrollToBrands}>Brands</NavBarMenu>
               <NavBarMenu onClick={() => navigate('/hr')}>HR</NavBarMenu>
@@ -72,7 +74,7 @@ export const NavBar = () => {
         <HoverMenuWrapper 
           style={{ opacity: isHovered ? '1' : '0' }}
         >
-          <HoverMenu />
+          <HoverMenu isHovered={isHovered} />
         </HoverMenuWrapper>
       </NavBarWrapper>
       {clickBar && (

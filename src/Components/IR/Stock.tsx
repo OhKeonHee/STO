@@ -1,5 +1,5 @@
-import { Table, TableProps } from 'antd';
-import React from 'react'
+import { Table, TableProps, TableColumnType } from 'antd';
+import React, { useEffect, useState } from 'react'
 import { IRContent } from '../../organism/Company/IR/styles';
 import { StockData } from '../Data/StockData';
 
@@ -22,15 +22,25 @@ interface DataType {
 
 export const Stock = () => {
   const { Data } = StockData();
+  const [width, setWidth] = useState(window.innerWidth);
 
-  const columns: TableProps<DataType>['columns'] = [
+  useEffect(() => {
+    const handleResize = () => {
+      setWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const columns: TableColumnType<DataType>[] = [
     {
       dataIndex: 'date',
       title: '일자',
       render: (value, data, index) => {
         return (
           <div key={index} className='date'>
-            <p>{data?.date}</p>
+            <p>{width >= 1241 ? data?.date : data?.date?.slice(5)}</p>
           </div>
         )
       }
@@ -150,9 +160,21 @@ export const Stock = () => {
       }
     },
   ];
+
+  const filteredColumns = columns.filter(column => {
+    if (column.dataIndex === 'money' && width < 1117) return false;
+    if (column.dataIndex === 'stock' && width < 1205) return false;
+    if (column.dataIndex === 'total' && width < 960) return false;
+    if (column.dataIndex === 'amount' && width < 687) return false;
+    if (column.dataIndex === 'rate' && width < 594) return false;
+    if (column.dataIndex === 'than' && width < 516) return false;
+    if (column.dataIndex === 'market' && width < 438) return false;
+    return true;
+  });
+
   return (
     <IRContent>
-      <Table className='stock' dataSource={Data} columns={columns} />
+      <Table className='stock' dataSource={Data} columns={filteredColumns} />
     </IRContent>
   )
 }

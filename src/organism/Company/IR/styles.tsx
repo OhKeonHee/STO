@@ -6,6 +6,9 @@ export const IRWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  @media (max-width: 820px) {
+    padding: 20px;
+  }
 `
 export const IRTitle = styled.p`
   font-size: 32px;
@@ -38,6 +41,7 @@ export const IRContent = styled.div`
   align-items: center;
   margin-top: 40px;
   gap: 10px;
+  margin-bottom: 110px;
   .ant-table-wrapper {
     width: 100%;
     max-width: 1100px;
@@ -67,7 +71,8 @@ export const IRSearchArea = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  width: 1100px;
+  width: 100%;
+  max-width: 1100px;
   .ant-input {
     width: 200px;
     border-right: none;

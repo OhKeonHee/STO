@@ -4,6 +4,8 @@ import '../../Assets/fonts/GmarketSans.css'
 
 export const MainWrapper = styled.div`
   width: 100vw;
+  min-width: 350px !important;
+  position: relative;
   display: flex;
   flex-direction: column;
 `
@@ -67,6 +69,10 @@ export const PhilosophySubTitle = styled.p`
   letter-spacing: -0.4px;
   @media (max-width: 700px) {
     font-size: 18px;
+    white-space: nowrap;
+  }
+  @media (max-width: 505px) {
+    font-size: 16px;
   }
 `
 export const PhilosophyTxt = styled.p`
@@ -83,6 +89,9 @@ export const PhilosophyTxt = styled.p`
     white-space: pre-wrap;
     text-align: center;
   }
+  @media (max-width: 505px) {
+    font-size: 12px;
+  }
 `
 export const PhilosophyContent = styled.div`
   position: relative;
@@ -93,14 +102,15 @@ export const PhilosophyContent = styled.div`
     width: auto;
     min-width: 700px;
   }
-  @media (max-width: 700px) {
+  @media (max-width: 745px) {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 400px;
     gap: 30px;
-    min-width: 100%;
+    width: 100vw;
+    min-width: auto;
   }
 `
 export const PhilosophyContentTxtArea = styled.div`
@@ -111,8 +121,21 @@ export const PhilosophyContentTxtArea = styled.div`
   padding: 10px 20px;
   color: #fff;
   border-radius: 20px;
+  @media (max-width: 745px) {
+    border-radius: 10px;
+    min-width: 90%;
+  }
+  @media (max-width: 400px) {
+    padding-right: 0;
+  }
   span {
     font-size: 20px;
+    white-space: nowrap;
+    width: 40px;
+    display: inline-block;
+    @media (max-width: 400px) {
+      font-size: 16px;
+    }
   }
   .vertical {
     height: 60px;
@@ -121,6 +144,10 @@ export const PhilosophyContentTxtArea = styled.div`
   }
   p {
     font-size: 14px;
+    white-space: nowrap;
+    @media (max-width: 400px) {
+      font-size: 12px;
+    }
   }
   &.diversity {
     background-color: #EC2029;
@@ -132,7 +159,7 @@ export const PhilosophyContentTxtArea = styled.div`
     @media (max-width: 1000px) {
       right: 0px;
     }
-    @media (max-width: 700px) {
+    @media (max-width: 745px) {
       left: 0px;
       top: 0;
     }
@@ -147,7 +174,7 @@ export const PhilosophyContentTxtArea = styled.div`
     @media (max-width: 1000px) {
       bottom: 100px;
     }
-    @media (max-width: 700px) {
+    @media (max-width: 745px) {
       left: 0px;
       top: 0;
     }
@@ -162,7 +189,7 @@ export const PhilosophyContentTxtArea = styled.div`
     @media (max-width: 1000px) {
       left: -20px;
     }
-    @media (max-width: 700px) {
+    @media (max-width: 745px) {
       left: 0px;
       top: 0;
     }
@@ -175,7 +202,7 @@ export const PhilosophyContentTxtArea = styled.div`
       font-size: 11px;
     }
   }
-  @media (max-width: 700px) {
+  @media (max-width: 745px) {
     position: relative;
     width: 80%;
   }
@@ -187,7 +214,7 @@ export const PhilosophyLogo = styled.img`
   transform: translate(-50%, -50%);
   width: 250px;
   object-fit: contain;
-  @media (max-width: 700px) {
+  @media (max-width: 745px) {
     display: none;
   }
 `
@@ -203,6 +230,9 @@ export const HistoryWrapper = styled.div`
     object-fit: contain;
     width: auto;
     margin-top: 20px;
+  }
+  @media (max-width: 700px) {
+    padding: 20px;
   }
 `
 export const HistoryTitle = styled.p`
@@ -303,6 +333,12 @@ export const BrandsTxtTitle = styled.p`
   color: #2e2e2e;
   font-weight: 600;
   font-family: 'GmarketSans';
+  text-align: center;
+  padding-left: 10px;
+  padding-right: 10px;
+  @media (max-width: 568px) {
+    display: none;
+  }
   span {
     font-weight: bold;
     color: #111;
@@ -315,8 +351,13 @@ export const BrandsTxtContent = styled.p`
   font-size: 13px;
   font-weight: 700;
   text-align: center;
+  padding-left: 10px;
+  padding-right: 10px;
   @media (max-width: 1150px) {
     font-size: 11px;
+  }
+  @media (max-width: 500px) {
+    font-size: 9px;
   }
 `
 
@@ -371,6 +412,11 @@ export const Directions = styled.div`
     padding-left: 0px;
     padding-right: 0px;
   }
+  @media (max-width: 700px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 50px;
+  }
 `
 export const Traffic = styled.div`
   flex: 1;
@@ -378,6 +424,9 @@ export const Traffic = styled.div`
   flex-direction: column;
   align-items: center;
   border-right: 1px solid #111;
+  @media (max-width: 700px) {
+    border-right: none;
+  }
 `
 export const Address = styled.div`
   flex: 1;
@@ -385,6 +434,9 @@ export const Address = styled.div`
   flex-direction: column;
   align-items: center;
   padding-left: 50px;
+  @media (max-width: 700px) {
+    padding-left: 0px;
+  }
 `
 export const ContactIcon = styled.div`
   display: flex;
@@ -394,6 +446,9 @@ export const ContactIcon = styled.div`
   height: 50px;
   > * {
     scale: 2;
+    @media (max-width: 500px) {
+      scale: 1.3;
+    }
   }
 `
 export const ContactInfoHeader = styled.div`
@@ -407,6 +462,9 @@ export const ContactInfoTitle = styled.p`
   font-size: 18px;
   letter-spacing: -0.4px;
   font-weight: 600;
+  @media (max-width: 500px) {
+    font-size: 14px;
+  }
 `
 export const ContactInfo = styled.div`
   display: flex;
@@ -423,5 +481,9 @@ export const ContactInfo = styled.div`
     color: #fff;
     padding: 2px;
     margin-right: 8px;
+  }
+  @media (max-width: 700px) {
+    margin-left: 30px;
+    margin-top: 20px;
   }
 `

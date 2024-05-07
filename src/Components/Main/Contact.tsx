@@ -17,7 +17,7 @@ export const Contact = () => {
             </ContactIcon>
             <ContactInfoTitle>교통정보</ContactInfoTitle>
           </ContactInfoHeader>
-          <ContactInfo style={{marginLeft: '-90px'}}>
+          <ContactInfo>
             <p><span>지하철</span> - 9호선 중미역</p>
             <p><span>버스</span> - 블루나인 비즈니스 센터. 이마트</p>
             <p><span className='badge' style={{backgroundColor: '#3F6091'}}>간선</span> 670 672</p>
@@ -33,7 +33,7 @@ export const Contact = () => {
             </ContactIcon>
             <ContactInfoTitle>주소</ContactInfoTitle>
           </ContactInfoHeader>
-          <ContactInfo style={{paddingLeft: 30}}>
+          <ContactInfo>
             <p>㉾07547 서울시 강서구 양천로 583 우림블루나인 B동 15층</p>
           </ContactInfo>
         </Address>

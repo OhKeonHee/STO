@@ -40,7 +40,7 @@ export const Philosophy = () => {
           </p>
         </PhilosophyContentTxtArea>
         <PhilosophyContentTxtArea className='autonomy'>
-          {width >= 700 ? (
+          {width >= 745 ? (
             <>
               <p>
                 항상 자신의 마음을 돌아보고 살펴라<br />

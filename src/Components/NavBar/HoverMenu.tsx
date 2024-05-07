@@ -2,11 +2,11 @@ import React from 'react'
 import { HoverMenuDisplay, Menu } from './styles';
 import { useNavigate } from 'react-router-dom';
 
-export const HoverMenu = () => {
+export const HoverMenu = ({ isHovered }: { isHovered: any }) => {
   const navigate = useNavigate();
 
   return (
-    <div>
+    <div style={{ display: isHovered ? 'flex' : 'none' }}>
       <HoverMenuDisplay>
         <Menu onClick={() => navigate('/company/IR')}>IR</Menu>
         <Menu onClick={() => navigate('/company/news')}>News</Menu>
